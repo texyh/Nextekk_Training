@@ -1,0 +1,14 @@
+<div class="container">
+<div style="text-align:center">
+  <h1>
+    Welcome to {{title}}
+  </h1>
+  <input [value]="value" class="form-control" />
+<hr>
+  <input [(ngModel)]="name" class="form-control" />
+<hr>
+  <button type="button" (click)="greet()">Click Me</button>
+</div>
+
+<p>One way Binding: {{value}}</p>
+<p>Two way Binding: {{name}}</p>
