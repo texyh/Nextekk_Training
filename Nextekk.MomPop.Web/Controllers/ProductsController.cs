@@ -43,7 +43,7 @@ namespace Nextekk.MomPop.Web.Controllers
         }
 
         [HttpPost]
-        public int Create(SaveProductViewModel product)
+        public int Create([FromBody]SaveProductViewModel product)
         {
             return 1; // Todo
         }
