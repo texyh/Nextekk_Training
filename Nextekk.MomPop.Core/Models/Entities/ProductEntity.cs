@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace Nextekk.MomPop.Web.Models
+namespace Nextekk.MomPop.Core.Models.Entities
 {
-    public class ProductViewModel
+    public class ProductEntity
     {
         public int Id { get; set; }
 
@@ -16,6 +15,10 @@ namespace Nextekk.MomPop.Web.Models
         public int Stock { get; set; }
 
         public decimal Price { get; set; }
+        
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
         
     }
 }

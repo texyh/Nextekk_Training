@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nextekk.MomPop.Web.Models;
+using Nextekk.MomPop.Core.Models;
+using Nextekk.MomPop.Business;
+using Nextekk.MomPop.Core.Services;
 
 namespace Nextekk.MomPop.Web.Controllers
 {
@@ -15,20 +18,26 @@ namespace Nextekk.MomPop.Web.Controllers
     [Route("api/Products")]
     public class ProductsController : Controller
     {
-        IEnumerable<ProductViewModel> productDB = new List<ProductViewModel>
+        private readonly IProductService _productService;
+
+        /// <summary>
+        /// The constructor for the product constroller
+        /// </summary>
+        public ProductsController(IProductService service)
         {
-               new ProductViewModel { Name = "Hp Pavallion", Description ="cool laptop", Id = 1, Price = 100000, Stock = 10 },
-               new ProductViewModel { Name = "samsung", Description ="cool laptop", Id = 2, Price = 105000, Stock = 20 },
-        };
+            _productService = service;
+        }
+
+
         /// <summary>
         /// This gets the list of products in the system
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<ProductViewModel> GetAll()
+        public Task<IEnumerable<Product>> GetAll()
         {
-            return productDB.ToList();
-                
+            return _productService.GetAll();
+
         }
 
         /// <summary>
@@ -37,27 +46,35 @@ namespace Nextekk.MomPop.Web.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet, Route("{id:min(1)}")]
-        public ProductViewModel Get(int id)
+        public Task<Product> Get(int id)
         {
-            return productDB.FirstOrDefault(x => x.Id == id);
+            return _productService.Get(id);
         }
-
+        
+        /// <summary>
+        /// Creates a new Product
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPost]
-        public int Create([FromBody]SaveProductViewModel product)
+        public Task<int> Create([FromBody]SaveProductViewModel product)
         {
-            return 1; // Todo
+            var entity = product.ToEntity();
+            return _productService.Create(entity);
         }
 
-        [HttpPut]
-        public void Update(SaveProductViewModel product)
+
+        [HttpPut, Route("{id:min(1)}")]
+        public Task Update(int id, [FromBody]SaveProductViewModel product)
         {
-            //Todo
+            return _productService.Update(product.ToEntity(id));
         }
+
 
         [HttpDelete]
-        public void Delete(int id)
+        public Task Delete(int id)
         {
-            //Todo
+            return _productService.Delete(id);
         }
     }
 }

@@ -22,4 +22,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Nextekk.MomPop.Business\Nextekk.MomPop.Business.csproj" />
+    <ProjectReference Include="..\Nextekk.MomPop.Core\Nextekk.MomPop.Core.csproj" />
+  </ItemGroup>
+
 </Project>

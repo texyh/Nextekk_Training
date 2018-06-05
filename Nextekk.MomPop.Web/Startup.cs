@@ -11,6 +11,8 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using Microsoft.Extensions.PlatformAbstractions;
+using Nextekk.MomPop.Core.Services;
+using Nextekk.MomPop.Business;
 
 namespace Nextekk.MomPop.Web
 {
@@ -27,6 +29,8 @@ namespace Nextekk.MomPop.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddTransient<IProductService, ProductService>();
 
             services.AddSwaggerGen(opt =>
             {
