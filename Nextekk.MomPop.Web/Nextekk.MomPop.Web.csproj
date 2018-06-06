@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Nextekk.MomPop.Business\Nextekk.MomPop.Business.csproj" />
     <ProjectReference Include="..\Nextekk.MomPop.Core\Nextekk.MomPop.Core.csproj" />
+    <ProjectReference Include="..\Nextekk.MomPop.Data\Nextekk.MomPop.Data.csproj" />
   </ItemGroup>
 
 </Project>

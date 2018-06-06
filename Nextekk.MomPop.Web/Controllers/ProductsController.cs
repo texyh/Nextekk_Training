@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nextekk.MomPop.Web.Models;
@@ -16,6 +17,7 @@ namespace Nextekk.MomPop.Web.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/Products")]
+    [EnableCors("myCorsPolicy")]
     public class ProductsController : Controller
     {
         private readonly IProductService _productService;

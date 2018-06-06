@@ -10,9 +10,13 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.PlatformAbstractions;
 using Nextekk.MomPop.Core.Services;
 using Nextekk.MomPop.Business;
+using Nextekk.MomPop.Core.Repository;
+using Nextekk.MomPop.Data.Context;
+using Nextekk.MomPop.Data.Repositories;
 
 namespace Nextekk.MomPop.Web
 {
@@ -28,9 +32,23 @@ namespace Nextekk.MomPop.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+
             services.AddMvc();
 
-            services.AddTransient<IProductService, ProductService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddDbContext<NextekkMomPopDbContext>(opt => opt.UseSqlServer(connectionString));
+
+            services.AddCors(x =>
+            {
+                x.AddPolicy("myCorsPolicy", p =>
+                {
+                    p.AllowAnyHeader();
+                    p.AllowAnyOrigin();
+                    p.AllowAnyMethod();
+                });
+            });
 
             services.AddSwaggerGen(opt =>
             {
@@ -60,6 +78,8 @@ namespace Nextekk.MomPop.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("myCorsPolicy");
 
             app.UseSwagger();
             app.UseSwaggerUI(x =>

@@ -5,9 +5,13 @@ VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nextekk.MomPop.Web", "Nextekk.MomPop.Web\Nextekk.MomPop.Web.csproj", "{BBBD910F-08D4-4F79-940F-62972749C227}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nextekk.MomPop.Core", "Nextekk.MomPop.Core\Nextekk.MomPop.Core.csproj", "{FBA8C5C4-0610-462B-A318-76B5466B8F35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nextekk.MomPop.Core", "Nextekk.MomPop.Core\Nextekk.MomPop.Core.csproj", "{FBA8C5C4-0610-462B-A318-76B5466B8F35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nextekk.MomPop.Business", "Nextekk.MomPop.Business\Nextekk.MomPop.Business.csproj", "{CB92CD56-7FDB-471E-A647-09DBA237F438}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nextekk.MomPop.Business", "Nextekk.MomPop.Business\Nextekk.MomPop.Business.csproj", "{CB92CD56-7FDB-471E-A647-09DBA237F438}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Nextekk.MomPop.Database", "Nextekk.MomPop.Database\Nextekk.MomPop.Database.sqlproj", "{B170625D-95EF-4691-A77A-93379FFFE3A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nextekk.MomPop.Data", "Nextekk.MomPop.Data\Nextekk.MomPop.Data.csproj", "{837A18EE-EA8B-421E-BF96-BA396E7E8694}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,16 @@ Global
 		{CB92CD56-7FDB-471E-A647-09DBA237F438}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB92CD56-7FDB-471E-A647-09DBA237F438}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB92CD56-7FDB-471E-A647-09DBA237F438}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B170625D-95EF-4691-A77A-93379FFFE3A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B170625D-95EF-4691-A77A-93379FFFE3A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B170625D-95EF-4691-A77A-93379FFFE3A4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B170625D-95EF-4691-A77A-93379FFFE3A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B170625D-95EF-4691-A77A-93379FFFE3A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B170625D-95EF-4691-A77A-93379FFFE3A4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{837A18EE-EA8B-421E-BF96-BA396E7E8694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{837A18EE-EA8B-421E-BF96-BA396E7E8694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{837A18EE-EA8B-421E-BF96-BA396E7E8694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{837A18EE-EA8B-421E-BF96-BA396E7E8694}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

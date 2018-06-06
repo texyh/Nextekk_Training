@@ -6,42 +6,58 @@ using System.Text;
 using Nextekk.MomPop.Core.Models;
 using Nextekk.MomPop.Core.Models.Entities;
 using System.Threading.Tasks;
+using Nextekk.MomPop.Core.Repository;
 
 namespace Nextekk.MomPop.Business
 {
     public class ProductService : IProductService
     {
-        IEnumerable<ProductEntity> productDB = new List<ProductEntity>
+        private readonly IProductRepository _productRepository;
+
+        public ProductService(IProductRepository productRepository)
         {
-            new ProductEntity { Name = "Hp Pavallion", Description ="cool laptop", Id = 1, Price = 100000, Stock = 10, CreatedAt = DateTime.UtcNow},
-            new ProductEntity { Name = "samsung", Description ="cool laptop", Id = 2, Price = 105000, Stock = 20, CreatedAt = DateTime.UtcNow },
-        };
+            _productRepository = productRepository;
+        }
+
 
         public async Task<int> Create(ProductEntity product)
         {
-            throw new NotImplementedException();
+            product.CreatedAt = DateTime.UtcNow;
+            product.UpdatedAt = DateTime.UtcNow;
+
+            var id = await _productRepository.Create(product);
+            return id;
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _productRepository.Delete(id);
         }
 
         public async Task<Product> Get(int id)
         {
-            var product = productDB.FirstOrDefault(x => x.Id == id);
-            return await Task.FromResult(new Product(product));
+            var Product = await _productRepository.Get(id);
+            return new Product(Product);
         }
 
         public async Task<IEnumerable<Product>> GetAll()
         {
-            var products = productDB.Select(x => new Product(x)).ToList();
-            return await Task.FromResult(products);
+            var products = await _productRepository.GetAll();
+            return products.Select(x => new Product(x)).ToList();
         }
 
-        public Task Update(ProductEntity product)
+        public async Task Update(ProductEntity product)
         {
-            throw new NotImplementedException();
+            var entity = await _productRepository.Get(product.Id);
+
+            entity.Description = product.Description;
+            entity.Name = product.Name;
+            entity.Stock = product.Stock;
+            entity.Price = product.Price;
+            entity.UpdatedAt = DateTime.UtcNow;
+
+            await _productRepository.Update(new List<ProductEntity> { entity }); // This is a new list that takes just one member(the updated product)
+
         }
     }
 }
