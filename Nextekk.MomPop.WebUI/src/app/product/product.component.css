@@ -1,0 +1,9 @@
+div.box-shadow {
+    border: 1px solid #999;
+    padding: 1px;
+}
+
+.fa {
+    cursor: pointer;
+    padding: 2px;
+}

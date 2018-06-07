@@ -1,0 +1,6 @@
+<div class="row" *ngIf="show">
+    <h3>Items in your cart</h3>
+    <ol>
+        <li *ngFor="let cart of carts">{{cart.name}}  {{cart.quantity}} * {{cart.price}} <i class="fa fa-trash"></i></li>
+    </ol>
+</div>

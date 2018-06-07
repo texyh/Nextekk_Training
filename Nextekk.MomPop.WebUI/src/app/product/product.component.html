@@ -1,1 +1,53 @@
-<h2>This is product</h2>
+<h1 class="display-4">Products</h1>
+
+<div class="form-group">
+  <input type="text" class="form-control" placeholder="Search" (keyup)="searchProduct($event)" />
+</div>
+
+<div class="row">
+    <div class="col-sm-4 box-shadow">
+        <form class="form" #form="ngForm">
+            <div class="row">
+                <div class="col form-group">
+                    <input type="text" name="name" class="form-control" [(ngModel)]="newProduct.name" placeholder="Product Name" required />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-group">
+                    <input type="number" name="price" class="form-control" [(ngModel)]="newProduct.price" placeholder="Price" required>
+                </div>
+                <div class="col form-group">
+                    <input type="number" name="stock" class="form-control" [(ngModel)]="newProduct.stock" placeholder="Count" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-group">
+                    <textarea name="description" [(ngModel)]="newProduct.description" rows="4" class="form-control" placeholder="Description"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-primary btn-lg" value="Save" (click)="addProduct()" />
+            </div>
+        </form>    
+    </div>
+  <div class="col-sm-4 box-shadow" *ngFor="let product of products">
+    <div class="card-header">
+      <h4 class="my-0 font-weight-normal">{{product.name}} 
+          <i class="float-right fa fa-trash" (click)="deleteProduct(product.id)"></i>&nbsp;
+          <i class="float-right fa fa-pencil"></i>
+      </h4>
+    </div>
+    <div class="card-body">
+      <input class="form-control" type="checkbox" checked>
+      <h3>{{product.price | currency}}</h3>
+      <p>
+        <Strong>Stock
+          <br /> {{product.stock}}
+        </Strong>
+      </p>
+      <p>
+        {{product.description}}
+      </p>
+    </div>
+  </div>
+</div>
