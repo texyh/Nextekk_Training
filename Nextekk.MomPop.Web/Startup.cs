@@ -12,6 +12,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.PlatformAbstractions;
+using Newtonsoft.Json;
 using Nextekk.MomPop.Core.Services;
 using Nextekk.MomPop.Business;
 using Nextekk.MomPop.Core.Repository;
@@ -34,10 +35,17 @@ namespace Nextekk.MomPop.Web
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
+            });
 
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ITransactionService, TransactionService>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
+
             services.AddDbContext<NextekkMomPopDbContext>(opt => opt.UseSqlServer(connectionString));
 
             services.AddCors(x =>

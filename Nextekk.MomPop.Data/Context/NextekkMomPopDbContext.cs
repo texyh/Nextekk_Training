@@ -15,11 +15,14 @@ namespace Nextekk.MomPop.Data.Context
 
         public DbSet<ProductEntity> Products { get; set; }
 
+        public DbSet<OrderItemEntity> OrderItems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            
+            builder.Entity<OrderItemEntity>()
+                .HasOne(x => x.Product);
         }
         
     }

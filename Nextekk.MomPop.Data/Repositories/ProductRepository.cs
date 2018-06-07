@@ -37,6 +37,7 @@ namespace Nextekk.MomPop.Data.Repositories
 
         public async Task<ProductEntity> Get(int id)
         {
+           
             return await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
         }
 
@@ -45,9 +46,15 @@ namespace Nextekk.MomPop.Data.Repositories
             return await _dbContext.Products.ToListAsync();
         }
 
-        public Task Update(IEnumerable<ProductEntity> products)
+        public async Task<IEnumerable<ProductEntity>> GetProductsInIds(IEnumerable<int> ids)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Products.Where(x => ids.Contains(x.Id)).ToListAsync();
+        }
+
+        public async Task Update(IEnumerable<ProductEntity> products)
+        {
+            _dbContext.UpdateRange(products);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

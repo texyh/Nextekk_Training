@@ -17,6 +17,8 @@ namespace Nextekk.MomPop.Core.Repository
 
         Task Update(IEnumerable<ProductEntity> products);
 
+        Task<IEnumerable<ProductEntity>> GetProductsInIds(IEnumerable<int> ids);
+
         Task Delete(int id);
     }
 }
