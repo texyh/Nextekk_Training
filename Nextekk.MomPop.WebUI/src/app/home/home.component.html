@@ -1,21 +1,20 @@
-
-  <div class="card-deck mb-3 text-center">
-    <div class="card mb-4 box-shadow" *ngFor="let product of products">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal">{{product.name}}</h4>
-      </div>
-      <div class="card-body">
-        <input class="form-control" type="checkbox" checked>
-        <h3>{{product.price}}</h3>
-        <p>
-          <Strong>Stock
-            <br /> {{product.stock}}
-          </Strong>
-        </p>
-        <p>
-          {{product.description}}
-        </p>
-        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Add to Cart</button>
-      </div>
+<div class="row">
+  <div class="col-sm-4 box-shadow" *ngFor="let product of products">
+    <div class="card-header">
+      <h4 class="my-0 font-weight-normal">{{product.name}}</h4>
+    </div>
+    <div class="card-body">
+      <input class="form-control" type="checkbox" checked>
+      <h3>{{product.price | currency}}</h3>
+      <p>
+        <Strong>Stock
+          <br /> {{product.stock}}
+        </Strong>
+      </p>
+      <p>
+        {{product.description}}
+      </p>
+      <button type="button" class="btn btn-lg btn-block btn-outline-primary">Add to Cart</button>
     </div>
   </div>
+</div>
