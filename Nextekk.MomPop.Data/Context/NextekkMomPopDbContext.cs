@@ -17,12 +17,16 @@ namespace Nextekk.MomPop.Data.Context
 
         public DbSet<OrderItemEntity> OrderItems { get; set; }
 
+        public DbSet<OrderEntity> Orders { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.Entity<OrderItemEntity>()
-                .HasOne(x => x.Product);
+                .HasOne(x => x.Product).WithMany();
+
+            builder.Entity<OrderEntity>().HasMany(x => x.OrderItems).WithOne().HasForeignKey(x => x.OrderId);
         }
         
     }

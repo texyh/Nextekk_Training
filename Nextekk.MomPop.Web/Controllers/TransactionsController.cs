@@ -28,6 +28,7 @@ namespace Nextekk.MomPop.Web.Controllers
         }
 
         [HttpPost]
+        [Route("~/api/transaction/checkout")]
         public async Task Checkout([FromBody]IEnumerable<OrderItemViewModel> orderItems)
         {
             var orderEntities = orderItems.Select(x => x.ToEntity());
@@ -35,9 +36,16 @@ namespace Nextekk.MomPop.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<OrderItemEntity>> GetOrderItems()
+        public async Task<IEnumerable<OrderEntity>> GetOrders()
         {
-            return await _transactionService.GetAllOrderItems();
+            return await _transactionService.GetOrders();
+        }
+
+        [HttpGet]
+        [Route("{id:guid}")]
+        public async Task<OrderEntity> GetOrder(Guid id)
+        {
+            return await _transactionService.GetOrder(id);
         }
     }
 }

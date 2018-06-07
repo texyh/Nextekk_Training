@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Orders]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [CreatedDate] DATETIME2 NOT NULL DEFAULT sysutcdatetime()
+)

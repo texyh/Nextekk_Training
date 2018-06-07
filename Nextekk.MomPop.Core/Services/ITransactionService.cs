@@ -10,6 +10,9 @@ namespace Nextekk.MomPop.Core.Services
     {
         Task ProcessCheckout(IEnumerable<OrderItemEntity> orderItems);
 
-        Task<IEnumerable<OrderItemEntity>> GetAllOrderItems();
+        Task<IEnumerable<OrderEntity>> GetOrders();
+
+        Task<OrderEntity> GetOrder(Guid id);
+
     }
 }

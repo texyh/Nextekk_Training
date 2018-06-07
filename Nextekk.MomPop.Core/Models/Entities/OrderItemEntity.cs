@@ -12,6 +12,8 @@ namespace Nextekk.MomPop.Core.Models.Entities
 
         public int  Quantity { get; set; }
 
+        public Guid OrderId { get; set; }
+
         public virtual ProductEntity Product { get; set; }
     }
 }

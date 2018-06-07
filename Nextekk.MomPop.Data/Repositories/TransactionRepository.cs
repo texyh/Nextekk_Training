@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Nextekk.MomPop.Core.Models.Entities;
 using Nextekk.MomPop.Core.Repository;
 using Nextekk.MomPop.Data.Context;
+using System.Linq;
 
 namespace Nextekk.MomPop.Data.Repositories
 {
@@ -18,15 +19,25 @@ namespace Nextekk.MomPop.Data.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task CreateOrderItems(IEnumerable<OrderItemEntity> orderItems)
+        public async Task CreateOrder(OrderEntity order)
         {
-            _dbContext.AddRange(orderItems);
+            _dbContext.Orders.Add(order);
+            _dbContext.OrderItems.AddRange(order.OrderItems);
             await  _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<OrderItemEntity>> GetAllOrderItems()
+        public async Task<IEnumerable<OrderEntity>> GetAllOrders()
         {
-              return  await _dbContext.OrderItems.Include(x => x.Product).ToListAsync();
+              return  await _dbContext.Orders.ToListAsync();
+        }
+
+        public async Task<OrderEntity> GetOrder(Guid id)
+        {
+            return await _dbContext.Orders
+                .Include(x => x.OrderItems)
+                .Include(x => x.OrderItems.Select(y => y.Product))
+                
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

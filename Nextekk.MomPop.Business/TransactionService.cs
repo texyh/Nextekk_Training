@@ -20,9 +20,19 @@ namespace Nextekk.MomPop.Business
             _transactionRepository = transactionRepository;
         }
 
-        public Task<IEnumerable<OrderItemEntity>> GetAllOrderItems()
+        public Task<IEnumerable<OrderEntity>> GetAllOrderItems()
         {
-            return _transactionRepository.GetAllOrderItems();
+            return _transactionRepository.GetAllOrders();
+        }
+
+        public async Task<OrderEntity> GetOrder(Guid id)
+        {
+            return await _transactionRepository.GetOrder(id);
+        }
+
+        public async Task<IEnumerable<OrderEntity>> GetOrders()
+        {
+            return await _transactionRepository.GetAllOrders();
         }
 
         public async Task ProcessCheckout(IEnumerable<OrderItemEntity> orderItems)
@@ -42,12 +52,18 @@ namespace Nextekk.MomPop.Business
 
         private async Task CreateOrderItems(IEnumerable<OrderItemEntity> orderItems)
         {
+            var order = new OrderEntity { Id = Guid.NewGuid() };
+            order.CreatedDate = DateTime.UtcNow;
+
             foreach (var item in orderItems)
             {
                 item.Id = Guid.NewGuid();
+                item.OrderId = order.Id;
             }
 
-            await  _transactionRepository.CreateOrderItems(orderItems);
+            order.OrderItems = orderItems.ToList();
+            
+            await  _transactionRepository.CreateOrder(order);
         }
     }
 }
