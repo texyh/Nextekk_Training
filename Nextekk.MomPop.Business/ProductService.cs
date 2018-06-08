@@ -57,7 +57,7 @@ namespace Nextekk.MomPop.Business
             entity.UpdatedAt = DateTime.UtcNow;
 
             await _productRepository.Update(new List<ProductEntity> { entity }); // This is a new list that takes just one member(the updated product)
-
+            
         }
     }
 }

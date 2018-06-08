@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Nextekk.MomPop.Core.Helpers;
 using Nextekk.MomPop.Core.Models.Entities;
 using Nextekk.MomPop.Core.Repository;
 using Nextekk.MomPop.Core.Services;
@@ -47,13 +48,15 @@ namespace Nextekk.MomPop.Business
             }
 
             await  _productRepository.Update(products);
-            await CreateOrderItems(orderItems);
+            await CreateOrder(orderItems);
         }
 
-        private async Task CreateOrderItems(IEnumerable<OrderItemEntity> orderItems)
+        private async Task CreateOrder(IEnumerable<OrderItemEntity> orderItems)
         {
-            var order = new OrderEntity { Id = Guid.NewGuid() };
-            order.CreatedDate = DateTime.UtcNow;
+            var order = new OrderEntity { Id = Guid.NewGuid(), CreatedDate = DateTime.UtcNow };
+
+            //order.Id = Guid.NewGuid(); another way to set Id;
+            //order.CreatedDate = DateTime.UtcNow;
 
             foreach (var item in orderItems)
             {
@@ -61,9 +64,14 @@ namespace Nextekk.MomPop.Business
                 item.OrderId = order.Id;
             }
 
-            order.OrderItems = orderItems.ToList();
+            //using Extension Methods 
+            //orderItems.ForEach(item =>
+            //{
+            //    item.Id = Guid.NewGuid();
+            //    item.OrderId = order.Id;
+            //}); 
             
-            await  _transactionRepository.CreateOrder(order);
+            await  _transactionRepository.CreateOrder(order, orderItems);
         }
     }
 }

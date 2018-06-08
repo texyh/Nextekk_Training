@@ -36,13 +36,14 @@ namespace Nextekk.MomPop.Web.Controllers
         }
 
         [HttpGet]
+        [Route("~/api/transaction/orders")]
         public async Task<IEnumerable<OrderEntity>> GetOrders()
         {
             return await _transactionService.GetOrders();
         }
 
         [HttpGet]
-        [Route("{id:guid}")]
+        [Route("~/api/transaction/{id:guid}/order")]
         public async Task<OrderEntity> GetOrder(Guid id)
         {
             return await _transactionService.GetOrder(id);

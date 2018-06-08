@@ -8,7 +8,7 @@ namespace Nextekk.MomPop.Core.Repository
 {
     public interface ITransactionRepository
     {
-        Task CreateOrder(OrderEntity order);
+        Task CreateOrder(OrderEntity order, IEnumerable<OrderItemEntity> orderItems);
 
         Task<IEnumerable<OrderEntity>> GetAllOrders();
 

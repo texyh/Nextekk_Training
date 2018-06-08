@@ -30,5 +30,10 @@ namespace Nextekk.MomPop.Core.Models
         public int Stock { get; set; }
 
         public decimal Price { get; set; }
+
+        public static string Example()
+        {
+            return "";
+        }
     }
 }

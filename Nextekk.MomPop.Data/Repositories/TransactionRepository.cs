@@ -19,10 +19,10 @@ namespace Nextekk.MomPop.Data.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task CreateOrder(OrderEntity order)
+        public async Task CreateOrder(OrderEntity order, IEnumerable<OrderItemEntity> orderItems)
         {
             _dbContext.Orders.Add(order);
-            _dbContext.OrderItems.AddRange(order.OrderItems);
+            _dbContext.OrderItems.AddRange(orderItems);
             await  _dbContext.SaveChangesAsync();
         }
 
@@ -35,9 +35,15 @@ namespace Nextekk.MomPop.Data.Repositories
         {
             return await _dbContext.Orders
                 .Include(x => x.OrderItems)
-                .Include(x => x.OrderItems.Select(y => y.Product))
-                
+                .ThenInclude(x => x.Product)
                 .FirstOrDefaultAsync(x => x.Id == id);
+
+            //return await _dbContext
+            //    .OrderItems
+            //    .Include(x => x.Product)
+            //    .Where(x => x.OrderId == id)
+            //    .ToListAsync();
         }
     }
 }
+

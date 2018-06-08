@@ -11,7 +11,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nextekk.MomPop.Business", "
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Nextekk.MomPop.Database", "Nextekk.MomPop.Database\Nextekk.MomPop.Database.sqlproj", "{B170625D-95EF-4691-A77A-93379FFFE3A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nextekk.MomPop.Data", "Nextekk.MomPop.Data\Nextekk.MomPop.Data.csproj", "{837A18EE-EA8B-421E-BF96-BA396E7E8694}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nextekk.MomPop.Data", "Nextekk.MomPop.Data\Nextekk.MomPop.Data.csproj", "{837A18EE-EA8B-421E-BF96-BA396E7E8694}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nextekk.MomPop.Tests", "Nextekk.MomPop.Tests\Nextekk.MomPop.Tests.csproj", "{2AEF6BC6-F9C1-429E-BBE1-D3C3D9218250}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Presentation", "1.Presentation", "{2C8F6DE5-0E41-482F-B8C5-E9249EF11642}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Domain", "2.Domain", "{F0AB2613-3A85-4F72-ADEC-93920E7D6A2E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Infrastructure", "3.Infrastructure", "{751256A3-A447-4A76-8CDC-76A5B9659AB6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Tests", "4.Tests", "{264B1C79-9581-4B47-AF96-2FC0E1C565DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,9 +51,21 @@ Global
 		{837A18EE-EA8B-421E-BF96-BA396E7E8694}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{837A18EE-EA8B-421E-BF96-BA396E7E8694}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{837A18EE-EA8B-421E-BF96-BA396E7E8694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AEF6BC6-F9C1-429E-BBE1-D3C3D9218250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AEF6BC6-F9C1-429E-BBE1-D3C3D9218250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AEF6BC6-F9C1-429E-BBE1-D3C3D9218250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AEF6BC6-F9C1-429E-BBE1-D3C3D9218250}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BBBD910F-08D4-4F79-940F-62972749C227} = {2C8F6DE5-0E41-482F-B8C5-E9249EF11642}
+		{FBA8C5C4-0610-462B-A318-76B5466B8F35} = {F0AB2613-3A85-4F72-ADEC-93920E7D6A2E}
+		{CB92CD56-7FDB-471E-A647-09DBA237F438} = {F0AB2613-3A85-4F72-ADEC-93920E7D6A2E}
+		{B170625D-95EF-4691-A77A-93379FFFE3A4} = {751256A3-A447-4A76-8CDC-76A5B9659AB6}
+		{837A18EE-EA8B-421E-BF96-BA396E7E8694} = {751256A3-A447-4A76-8CDC-76A5B9659AB6}
+		{2AEF6BC6-F9C1-429E-BBE1-D3C3D9218250} = {264B1C79-9581-4B47-AF96-2FC0E1C565DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {999F325C-F6A2-4597-B3DB-0951DFD25A46}
