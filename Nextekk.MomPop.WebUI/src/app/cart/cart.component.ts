@@ -1,6 +1,8 @@
 import { Cart } from "../common/models/cart.model";
-import { Component, Input } from "@angular/core";
+import { Component, Input, ViewChild, EventEmitter, Output } from "@angular/core";
 import { Product } from "../common/models/product.model";
+import { BsModalService, BsModalRef } from "ngx-bootstrap";
+import { ProductService } from "../common/service/product.service";
 
 @Component({
     selector: 'app-cart',
@@ -9,24 +11,64 @@ import { Product } from "../common/models/product.model";
 export class CartComponent {
     carts: Cart[];
 
+    @Output()
+    onCheckOutSuccessful: EventEmitter<object[]>;
+
     @Input()
     show: boolean;
 
-    get totalItems(): number {
-        return this.carts.length;
-    }
+    @ViewChild('cart')
+    template: any;
 
-    constructor() {
+    get totalItems(): number {
+        return this.carts.reduce((prev, curr) => prev = curr.quantity + prev, 0);
+    }
+    modalRef: BsModalRef;
+    config = {
+      backdrop: true,
+      ignoreBackdropClick: true
+    };
+    
+    constructor(private modalService: BsModalService, private productService: ProductService) {
         this.carts = [];
         this.show = false;
+        this.onCheckOutSuccessful = new EventEmitter<object[]>();
     }
 
     addItemToCarts(product: Product) {
-        const count = this.carts.reduce( (total, cart: Cart) => cart.id == product.id ? total + 1 : total, 0);
+        let cartInList = this.carts.find(x => x.id == product.id);
 
-        const cart = new Cart(product.id, product.name, product.price, count);
+        if(cartInList) {
+            cartInList.quantity += 1;
+        }
+        else{
+            cartInList = new Cart(product.id, product.name, product.price, 1);
+            this.carts.push(cartInList);
+        }
+        
 
-        this.carts.push(cart);
+        // const count = this.carts.reduce( (total, cart: Cart) => cart.id == product.id ? total + 1 : total, 0);
+
+        // const cart = new Cart(product.id, product.name, product.price, count);
+
+        // this.carts.push(cart);
+    }
+
+    showCart() {
+        this.modalRef = this.modalService.show(this.template, this.config);
     }
     
+    checkout() {
+        const itemsToCheckoutDTO = this.carts.map(item => item.toDTO());
+
+        this.productService.checkout(itemsToCheckoutDTO).subscribe(data => {
+            this.carts = [];
+            this.onCheckOutSuccessful.emit(itemsToCheckoutDTO);
+            this.modalRef.hide();
+        });
+    }
+
+    remove(id: number) {
+        this.carts = this.carts.filter(x => x.id != id);
+    }
 }

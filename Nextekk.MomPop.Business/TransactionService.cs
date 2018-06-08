@@ -48,10 +48,10 @@ namespace Nextekk.MomPop.Business
             }
 
             await  _productRepository.Update(products);
-            await CreateOrder(orderItems);
+            await CreateOrder(orderItems.ToList());
         }
 
-        private async Task CreateOrder(IEnumerable<OrderItemEntity> orderItems)
+        private async Task CreateOrder(IList<OrderItemEntity> orderItems)
         {
             var order = new OrderEntity { Id = Guid.NewGuid(), CreatedDate = DateTime.UtcNow };
 

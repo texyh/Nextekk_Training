@@ -4,4 +4,11 @@ export class Cart {
         public price: number,
         public quantity: number) {
     }
+
+    toDTO(): object {
+        return {
+            productId: this.id,
+            quantity: this.quantity
+        };
+    }
 }

@@ -1,6 +1,26 @@
-<div class="row" *ngIf="show">
+<!-- <div class="row" *ngIf="show">
     <h3>Items in your cart</h3>
     <ol>
         <li *ngFor="let cart of carts">{{cart.name}}  {{cart.quantity}} * {{cart.price}} <i class="fa fa-trash"></i></li>
     </ol>
-</div>
+</div> -->
+
+<ng-template #cart>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Items in your cart</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+        <ol>
+            <li *ngFor="let cart of carts">{{cart.name}}  {{cart.quantity}} * {{cart.price}} 
+                <i class="fa fa-trash float-right" (click)="remove(cart.id)"></i>
+                <hr />
+            </li>
+        </ol>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning btn-lg float-left" (click)="checkout()">Checkout</button>
+    </div>
+</ng-template>

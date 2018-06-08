@@ -56,6 +56,17 @@ export class HomeComponent implements OnInit {
     }
 
     toggleCartView() {
-        this.show = !this.show;
+        // this.show = !this.show;
+        this.cartComponent.showCart();
+    }
+
+    checkOutSuccessful($event: any[]) {
+        this._products.forEach(product => {
+            const itemInCart = $event.find(x => x.productId == product.id);
+
+            if (itemInCart) {
+                product.stock -= itemInCart.quantity;
+            }
+        });
     }
 }

@@ -1,6 +1,6 @@
 <div class="float-right" id="cartContainer">
     <i id="shoppingCart" class="fa fa-shopping-cart" (click)="toggleCartView()">{{totalItemsInCart}}</i>
-    <app-cart [hidden]="hidden" [show]="show"></app-cart>
+    <app-cart (onCheckOutSuccessful)="checkOutSuccessful($event)"></app-cart>
 </div>
 
 <h1 class="display-4">Computers</h1>
