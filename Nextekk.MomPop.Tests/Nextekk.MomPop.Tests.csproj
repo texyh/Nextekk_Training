@@ -14,12 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Unit\Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Nextekk.MomPop.Business\Nextekk.MomPop.Business.csproj" />
     <ProjectReference Include="..\Nextekk.MomPop.Core\Nextekk.MomPop.Core.csproj" />
+    <ProjectReference Include="..\Nextekk.MomPop.Web\Nextekk.MomPop.Web.csproj" />
   </ItemGroup>
 
 </Project>

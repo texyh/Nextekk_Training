@@ -64,6 +64,24 @@ namespace Nextekk.MomPop.Tests.Services
 
             await GetService().Update(product);
             _productRepository.Verify(x => x.Update(It.Is<IEnumerable<ProductEntity>>(y => y.First().Stock == 10)), Times.Once);
+            _productRepository.Verify(x => x.Update(It.Is<IEnumerable<ProductEntity>>(y => y.First().Price == 250000)), Times.Once);
+            // you can add more verify;
+
+        }
+
+        [Fact]
+        public async Task ShouldBeAbleToCreateProduct()
+        {
+            InitializeRepositoryMock();
+            var product = new ProductEntity
+            {
+                Name = "hp",
+                Stock = 50,
+                Price = 250000,
+            };
+
+            await GetService().Create(product);
+            _productRepository.Verify(x => x.Create(It.Is<ProductEntity>(y => y.Stock == 50)), Times.Once);
         }
 
         private void SetUpRepositoryGet()
